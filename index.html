@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Todo list</title>
+
+        <link rel="stylesheet" href="./css/style.css" />
+
+        <!-- bootstrap -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+        />
+    </head>
+    <body>
+        <div class="body">
+            <div class="header container">
+                <div>
+                    <h2>Todo list</h2>
+                </div>
+            </div>
+
+            <div class="main container">
+                <div class="input-todo">
+                    <input
+                        id="input"
+                        type="text"
+                        tabindex="0"
+                        autocomplete="off"
+                    />
+                    <!-- <i class="bi bi-arrow-left-square btn-item"></i> -->
+                </div>
+
+                <ul class="todo-list">
+                    <li>
+                        <i
+                            class="bi bi-square btn-item"
+                            onclick="todoItem(this)"
+                        ></i>
+                        <div class="content">
+                            ${inputTodo.querySelector("#input").value}
+                        </div>
+                        <i
+                            class="bi bi-x-circle btn-item"
+                            onclick="clearItem(this)"
+                        ></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer container">
+                @copyright:
+                <div>Nguyen Huy</div>
+            </div>
+        </div>
+        <script src="./js/style.js"></script>
+    </body>
+</html>
