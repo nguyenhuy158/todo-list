@@ -1,8 +1,40 @@
 let inputTodo = document.querySelector(".input-todo");
 let todoList = document.querySelector(".todo-list");
-let todo = "";
+let todo;
+let id = 0;
 let btnAdd = inputTodo.querySelector(".bi");
 let btnEnter = document.querySelector(".input-todo > .bi");
+
+function loadData() {
+    let store = localStorage.getItem("key");
+    console.log(store);
+    if (store === null) {
+        todoList.innerHTML = "";
+        todo = [];
+        id = 0;
+    } else {
+        todo = JSON.parse(store);
+        id = todo.length;
+        console.log(todo);
+        for (let index = 0; index < todo.length; index++) {
+            add(`
+           <li>
+               <i
+                   class="bi bi-square btn-item"
+                   onclick="todoItem(this)"
+               ></i>
+               <div class="content" name="${index}">
+               ${todo[index]}
+               </div>
+               <i
+                   class="bi bi-x-circle btn-item"
+                   onclick="clearItem(this)"
+               ></i>
+           </li>
+           `);
+        }
+    }
+}
 
 function todoItem(btnItem) {
     console.log(btnItem);
@@ -20,6 +52,20 @@ function todoItem(btnItem) {
 function clearItem(btnItem) {
     console.log(btnItem.parentNode);
     document.querySelector(".todo-list").removeChild(btnItem.parentNode);
+    console.log(
+        btnItem.parentNode.querySelector("div[name]").getAttribute("name")
+    );
+    // remove 1 element
+    todo.splice(
+        btnItem.parentNode.querySelector("div[name]").getAttribute("name"),
+        1
+    );
+
+    localStorage.setItem("key", JSON.stringify(todo));
+}
+
+function add(value) {
+    todoList.innerHTML = value + todoList.innerHTML;
 }
 
 function addTodo() {
@@ -30,7 +76,7 @@ function addTodo() {
                 class="bi bi-square btn-item"
                 onclick="todoItem(this)"
             ></i>
-            <div class="content">
+            <div class="content" name="${++id}">
             ${inputTodo.querySelector("#input").value}
             </div>
             <i
@@ -40,6 +86,10 @@ function addTodo() {
         </li>
         `;
         todoList.innerHTML = html + todoList.innerHTML;
+
+        todo.push(inputTodo.querySelector("#input").value);
+        console.log(todo);
+        localStorage.setItem("key", JSON.stringify(todo));
         inputTodo.querySelector("#input").value = "";
     }
 }
